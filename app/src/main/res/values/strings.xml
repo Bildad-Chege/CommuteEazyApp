@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">CommuteEazy</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="verification_message">A verification message has been sent to your phone number. Please input the code to verify the number
+    if it does not automatically do so.</string>
+    <string name="title_activity_maps">Map</string>
+</resources>
