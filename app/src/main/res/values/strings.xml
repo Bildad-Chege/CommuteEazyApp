@@ -6,4 +6,11 @@
     <string name="verification_message">A verification message has been sent to your phone number. Please input the code to verify the number
     if it does not automatically do so.</string>
     <string name="title_activity_maps">Map</string>
+    <string name="title_activity_home_page">HomePage</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
 </resources>
