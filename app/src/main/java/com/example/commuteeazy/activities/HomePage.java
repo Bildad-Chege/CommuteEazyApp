@@ -17,6 +17,9 @@ import android.view.MenuItem;
 
 import com.example.commuteeazy.R;
 import com.example.commuteeazy.adapters.HomeTabsAdapter;
+import com.example.commuteeazy.fragments.Guide;
+import com.example.commuteeazy.fragments.PerCounty;
+import com.example.commuteeazy.fragments.ShowOperators;
 
 public class HomePage extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -48,6 +51,7 @@ public class HomePage extends AppCompatActivity
         toggle.syncState();
 
         viewPager = (ViewPager) findViewById(R.id.viewpager);
+        setupViewPager(viewPager);
 
         tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(viewPager);
@@ -59,6 +63,10 @@ public class HomePage extends AppCompatActivity
 
     private void setupViewPager(ViewPager viewPager){
         adapter = new HomeTabsAdapter(getSupportFragmentManager());
+        adapter.addFragment(new ShowOperators(),"All Operators");
+        adapter.addFragment(new PerCounty(),"per Counties");
+        adapter.addFragment(new Guide(),"Guide");
+        viewPager.setAdapter(adapter);
     }
 
     @Override
