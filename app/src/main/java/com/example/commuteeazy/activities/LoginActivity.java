@@ -51,8 +51,8 @@ public class LoginActivity extends AppCompatActivity  {
         setContentView(R.layout.activity_login);
 
         username = findViewById(R.id.user_name);
-        password = findViewById(R.id.password);
-        login = findViewById(R.id.log_in);
+        password = findViewById(R.id.loginpassword);
+        login = findViewById(R.id.login_button);
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -75,7 +75,7 @@ public class LoginActivity extends AppCompatActivity  {
                 }
             }
         });
-        link = findViewById(R.id.sign_up_link);
+        link = findViewById(R.id.signup_link);
         link.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
