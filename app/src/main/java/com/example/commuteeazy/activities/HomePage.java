@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
+import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.support.design.widget.NavigationView;
@@ -16,17 +17,17 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.example.commuteeazy.R;
-import com.example.commuteeazy.adapters.HomeTabsAdapter;
-import com.example.commuteeazy.fragments.Guide;
+import com.example.commuteeazy.adapters.ViewPagerAdapter;
 import com.example.commuteeazy.fragments.PerCounty;
 import com.example.commuteeazy.fragments.ShowOperators;
+import com.example.commuteeazy.fragments.Updates;
 
 public class HomePage extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     private TabLayout tabLayout;
     private ViewPager viewPager;
-    private HomeTabsAdapter adapter;
+    private Fragment showOperators,perCounty,updates;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,22 +51,25 @@ public class HomePage extends AppCompatActivity
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-        viewPager = (ViewPager) findViewById(R.id.viewpager);
+        showOperators = new ShowOperators();
+        perCounty = new PerCounty();
+        updates = new Updates();
+
+        viewPager = (ViewPager) findViewById(R.id.pager);
         setupViewPager(viewPager);
 
         tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(viewPager);
 
-
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
     }
 
-    private void setupViewPager(ViewPager viewPager){
-        adapter = new HomeTabsAdapter(getSupportFragmentManager());
-        adapter.addFragment(new ShowOperators(),"All Operators");
-        adapter.addFragment(new PerCounty(),"per Counties");
-        adapter.addFragment(new Guide(),"Guide");
+    public void setupViewPager(ViewPager viewPager){
+        ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
+        adapter.addFragment(showOperators,"all operators");
+        adapter.addFragment(perCounty,"per county");
+        adapter.addFragment(updates,"updates");
         viewPager.setAdapter(adapter);
     }
 

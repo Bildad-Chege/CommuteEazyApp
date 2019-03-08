@@ -32,10 +32,12 @@
                 style="@style/Base.TextAppearance.AppCompat.Headline"/>
 
             <android.support.v7.widget.CardView
-                android:layout_width="300dp"
+                android:layout_width="350dp"
                 android:layout_height="300dp"
                 android:layout_gravity="center"
                 app:cardBackgroundColor="#99000000"
+                android:background="@drawable/rounded_card"
+                app:cardCornerRadius="50dp"
                 android:layout_marginTop="20dp"
                 android:padding="7dp">
 
@@ -54,7 +56,7 @@
                         android:textSize="20dp"/>
 
                     <android.support.design.widget.TextInputLayout
-                        android:layout_width="220dp"
+                        android:layout_width="320dp"
                         android:layout_marginTop="20dp"
                         android:layout_height="wrap_content"
                         android:hint="Username or Email"
@@ -63,14 +65,16 @@
 
                         <android.support.design.widget.TextInputEditText
                             android:layout_width="match_parent"
+                            android:drawableLeft="@mipmap/username"
                             android:layout_gravity="center"
+                            android:textColor="#fff"
                             android:layout_height="50dp"
                             android:id="@+id/username"/>
 
                     </android.support.design.widget.TextInputLayout>
 
                     <android.support.design.widget.TextInputLayout
-                        android:layout_width="220dp"
+                        android:layout_width="320dp"
                         android:layout_height="wrap_content"
                         android:hint="Password"
                         android:layout_marginTop="20dp"
@@ -80,31 +84,34 @@
                         <android.support.design.widget.TextInputEditText
                             android:layout_width="match_parent"
                             android:layout_height="50dp"
+                            android:textColor="#fff"
+                            android:inputType="textPassword"
+                            android:drawableLeft="@mipmap/password"
                             android:id="@+id/loginpassword"/>
 
                     </android.support.design.widget.TextInputLayout>
 
-                    <Button
-                        android:layout_width="250dp"
+                    <TextView
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:text="Dont have an account? Sign up now"
+                        android:textColor="@color/colorAccent"
                         android:layout_gravity="center"
-                        android:background="@drawable/rounded_edittext"
-                        android:text="Login"
                         android:layout_marginTop="20dp"
-                        android:id="@+id/login_button"/>
+                        android:id="@+id/signup_link"/>
 
                 </LinearLayout>
 
             </android.support.v7.widget.CardView>
 
-            <TextView
-                android:layout_width="wrap_content"
+            <Button
+                android:layout_width="250dp"
                 android:layout_height="wrap_content"
-                android:text="Dont have an account? Sign up now"
-                android:textColor="@color/colorAccent"
                 android:layout_gravity="center"
+                android:background="@drawable/rounded_edittext"
+                android:text="Login"
                 android:layout_marginTop="20dp"
-                android:id="@+id/signup_link"/>
+                android:id="@+id/login_button"/>
 
             <TextView
                 android:layout_width="wrap_content"
