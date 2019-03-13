@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.commuteeazy.DO.Operator;
 import com.example.commuteeazy.R;
 import com.example.commuteeazy.activities.HomePage;
 import com.example.commuteeazy.activities.ProfilePage;
@@ -18,11 +19,11 @@ import java.util.List;
 
 public class ShowAdapter extends RecyclerView.Adapter<ShowAdapter.ViewHolder> {
 
-    private List<String> names;
+    private List<Operator> operators;
     private Context mctx;
 
-    public ShowAdapter(List<String> names, Context mctx) {
-        this.names = names;
+    public ShowAdapter(List<Operator> operators, Context mctx) {
+        this.operators = operators;
         this.mctx = mctx;
     }
 
@@ -36,7 +37,7 @@ public class ShowAdapter extends RecyclerView.Adapter<ShowAdapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, final int i) {
-        viewHolder.tv.setText(names.get(i));
+        viewHolder.tv.setText(operators.get(i).getName());
         viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -48,7 +49,7 @@ public class ShowAdapter extends RecyclerView.Adapter<ShowAdapter.ViewHolder> {
 
     @Override
     public int getItemCount() {
-        return names.size();
+        return operators.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{

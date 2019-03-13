@@ -4,22 +4,22 @@ import java.math.BigInteger;
 
 public class User {
     private String firstName;
-    private String secondName;
+    private String lastName;
     private String userName;
-    private Long phoneNumber;
-    private String emailAddress;
-    private String accountPassword;
+    private Long phone;
+    private String email;
+    private String password;
 
     public User() {
     }
 
-    public User(String firstName, String secondName, String userName, Long phoneNumber, String emailAddress, String accountPassword) {
+    public User(String firstName, String lastName, String userName, Long phone, String email, String password) {
         this.firstName = firstName;
-        this.secondName = secondName;
+        this.lastName = lastName;
         this.userName = userName;
-        this.phoneNumber = phoneNumber;
-        this.emailAddress = emailAddress;
-        this.accountPassword = accountPassword;
+        this.phone = phone;
+        this.email = email;
+        this.password = password;
     }
 
     public String getFirstName() {
@@ -30,12 +30,12 @@ public class User {
         this.firstName = firstName;
     }
 
-    public String getSecondName() {
-        return secondName;
+    public String getLastName() {
+        return lastName;
     }
 
-    public void setSecondName(String secondName) {
-        this.secondName = secondName;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     public String getUserName() {
@@ -46,27 +46,27 @@ public class User {
         this.userName = userName;
     }
 
-    public Long getPhoneNumber() {
-        return phoneNumber;
+    public Long getPhone() {
+        return phone;
     }
 
-    public void setPhoneNumber(Long phoneNumber) {
-        this.phoneNumber = phoneNumber;
+    public void setPhone(Long phone) {
+        this.phone = phone;
     }
 
-    public String getEmailAddress() {
-        return emailAddress;
+    public String getEmail() {
+        return email;
     }
 
-    public void setEmailAddress(String emailAddress) {
-        this.emailAddress = emailAddress;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
-    public String getAccountPassword() {
-        return accountPassword;
+    public String getPassword() {
+        return password;
     }
 
-    public void setAccountPassword(String accountPassword) {
-        this.accountPassword = accountPassword;
+    public void setPassword(String password) {
+        this.password = password;
     }
 }

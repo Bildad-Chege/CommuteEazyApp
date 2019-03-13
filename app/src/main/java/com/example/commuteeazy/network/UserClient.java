@@ -1,6 +1,9 @@
 package com.example.commuteeazy.network;
 
+import com.example.commuteeazy.DO.Operator;
 import com.example.commuteeazy.DO.User;
+
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -15,4 +18,7 @@ public interface UserClient {
 
     @POST("addUser")
     Call<User> signup(@Body User user);
+
+    @GET("operators")
+    Call<List<Operator>> getAllOperators();
 }

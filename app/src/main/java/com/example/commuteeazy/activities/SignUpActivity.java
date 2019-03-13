@@ -74,7 +74,7 @@ public class SignUpActivity extends AppCompatActivity implements NamesFrag.BtnNa
         lastName = lName;
         userName = uName;
         user.setFirstName(firstName);
-        user.setSecondName(lastName);
+        user.setLastName(lastName);
         user.setUserName(userName);
     }
 
@@ -99,8 +99,8 @@ public class SignUpActivity extends AppCompatActivity implements NamesFrag.BtnNa
 //
 //            }
 //        });
-        user.setEmailAddress(emailAddress);
-        user.setPhoneNumber(mobile);
+        user.setEmail(emailAddress);
+        user.setPhone(mobile);
     }
 
     @Override
@@ -126,7 +126,7 @@ public class SignUpActivity extends AppCompatActivity implements NamesFrag.BtnNa
     @Override
     public void onPasswordPass(String password) {
         this.password = password;
-        user.setAccountPassword(this.password);
+        user.setPassword(this.password);
     }
 
     public class saveUserData extends AsyncTask<String,String,String>{
