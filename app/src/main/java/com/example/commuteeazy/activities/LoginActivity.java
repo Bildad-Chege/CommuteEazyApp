@@ -19,9 +19,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.commuteeazy.Config;
+import com.example.commuteeazy.DO.User;
 import com.example.commuteeazy.MapsActivity;
 import com.example.commuteeazy.R;
 import com.example.commuteeazy.network.JSONParser;
+import com.example.commuteeazy.network.UserClient;
 
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
@@ -33,6 +35,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class LoginActivity extends AppCompatActivity  {
     EditText username,password;
@@ -52,7 +60,7 @@ public class LoginActivity extends AppCompatActivity  {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        username = findViewById(R.id.user_name);
+        username = findViewById(R.id.username);
         password = findViewById(R.id.loginpassword);
         login = findViewById(R.id.login_button);
         login.setOnClickListener(new View.OnClickListener() {
@@ -103,34 +111,23 @@ public class LoginActivity extends AppCompatActivity  {
 
         @Override
         protected String doInBackground(String... strings) {
-            JSONParser parser = new JSONParser();
-            List<NameValuePair> params = new ArrayList<>();
-            //params.add(new BasicNameValuePair());
-            if (emailValidate(Config.loginText)){
-                params.add(new BasicNameValuePair("email",Config.loginText));
-                params.add(new BasicNameValuePair("password",Config.password));
-
-
-                JSONObject object = parser.makeHttpRequest(Config.hostName+Config.login,params);
-                try {
-                    status = object.getInt("status");
-                    message = object.getString("message");
-                } catch (JSONException e) {
-                    e.printStackTrace();
+            Retrofit.Builder builder = new Retrofit.Builder().baseUrl(Config.hostName).addConverterFactory(GsonConverterFactory.create());
+            Retrofit retrofit = builder.build();
+            UserClient client = retrofit.create(UserClient.class);
+            Call<User> call = client.login(Config.loginText,Config.password);
+            call.enqueue(new Callback<User>() {
+                @Override
+                public void onResponse(Call<User> call, Response<User> response) {
+                    Toast.makeText(getApplicationContext(),"Login successful",Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(LoginActivity.this,HomePage.class);
+                    startActivity(intent);
                 }
-            } else {
-                params.add(new BasicNameValuePair("userName",Config.loginText));
-                params.add(new BasicNameValuePair("password",Config.password));
 
-                JSONObject object = parser.makeHttpRequest(Config.hostName+Config.login,params);
-
-                try {
-                    status = object.getInt("status");
-                    message = object.getString("message");
-                } catch (JSONException e) {
-                    e.printStackTrace();
+                @Override
+                public void onFailure(Call<User> call, Throwable t) {
+                    Toast.makeText(getApplicationContext(),"Wrong Credentials",Toast.LENGTH_SHORT).show();
                 }
-            }
+            });
             return null;
         }
 

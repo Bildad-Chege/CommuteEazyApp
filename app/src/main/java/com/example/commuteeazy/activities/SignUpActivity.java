@@ -20,6 +20,7 @@ import com.example.commuteeazy.fragments.NamesFrag;
 import com.example.commuteeazy.fragments.PasswordFrag;
 import com.example.commuteeazy.fragments.VerificationFrag;
 import com.example.commuteeazy.network.JSONParser;
+import com.example.commuteeazy.network.UserClient;
 import com.google.android.gms.auth.api.phone.SmsRetriever;
 import com.google.android.gms.auth.api.phone.SmsRetrieverClient;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -33,6 +34,12 @@ import org.json.JSONObject;
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class SignUpActivity extends AppCompatActivity implements NamesFrag.BtnNamesListener, VerificationFrag.BtnVerificationListener, ContactsFrag.BtnContactsListener, PasswordFrag.BtnFinishListener {
 
@@ -84,14 +91,14 @@ public class SignUpActivity extends AppCompatActivity implements NamesFrag.BtnNa
     public void onContactsPass(Long phone, String email) {
         mobile = phone;
         emailAddress = email;
-        SmsRetrieverClient client = SmsRetriever.getClient(this);
-        Task<Void> task = client.startSmsRetriever();
-        task.addOnSuccessListener(new OnSuccessListener<Void>() {
-            @Override
-            public void onSuccess(Void aVoid) {
-
-            }
-        });
+//        SmsRetrieverClient client = SmsRetriever.getClient(this);
+//        Task<Void> task = client.startSmsRetriever();
+//        task.addOnSuccessListener(new OnSuccessListener<Void>() {
+//            @Override
+//            public void onSuccess(Void aVoid) {
+//
+//            }
+//        });
         user.setEmailAddress(emailAddress);
         user.setPhoneNumber(mobile);
     }
@@ -138,23 +145,26 @@ public class SignUpActivity extends AppCompatActivity implements NamesFrag.BtnNa
 
         @Override
         protected String doInBackground(String... strings) {
-            JSONParser parser = new JSONParser();
-            List<NameValuePair> params = new ArrayList<>();
-            params.add(new BasicNameValuePair("firstName",user.getFirstName()));
-            params.add(new BasicNameValuePair("lastName",user.getSecondName()));
-            params.add(new BasicNameValuePair("userName",user.getUserName()));
-            params.add(new BasicNameValuePair("phone",user.getPhoneNumber().toString()));
-            params.add(new BasicNameValuePair("email",user.getEmailAddress()));
-            params.add(new BasicNameValuePair("password",user.getAccountPassword()));
 
-            JSONObject object = parser.makeHttpRequest(Config.hostName+Config.signup,params);
-            try {
-                status = object.getInt("status");
-                message = object.getString("message");
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
+            User user = new User(firstName,lastName,userName,mobile,emailAddress,password);
 
+            Retrofit.Builder builder = new Retrofit.Builder().baseUrl(Config.hostName).addConverterFactory(GsonConverterFactory.create());
+            Retrofit retrofit = builder.build();
+            UserClient userClient = retrofit.create(UserClient.class);
+            Call<User> call = userClient.signup(user);
+            call.enqueue(new Callback<User>() {
+                @Override
+                public void onResponse(Call<User> call, Response<User> response) {
+                    Toast.makeText(getApplicationContext(),"Signed up successfully",Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(SignUpActivity.this,HomePage.class);
+                    startActivity(intent);
+                }
+
+                @Override
+                public void onFailure(Call<User> call, Throwable t) {
+                    Toast.makeText(getApplicationContext(),"Something went wrong",Toast.LENGTH_SHORT).show();
+                }
+            });
             return null;
         }
 
