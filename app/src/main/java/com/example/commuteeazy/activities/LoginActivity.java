@@ -125,7 +125,7 @@ public class LoginActivity extends AppCompatActivity  {
 
                 @Override
                 public void onFailure(Call<User> call, Throwable t) {
-                    Toast.makeText(getApplicationContext(),"Wrong Credentials",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(),"Server is unreachable. Check network",Toast.LENGTH_SHORT).show();
                 }
             });
             return null;

@@ -18,8 +18,11 @@ public class PerCounty extends Fragment {
 
     private GridView counties;
     private GridAdapter adapter;
-    private String[] names = {"Nairobi","Mombasa","Kisumu","Nakuru","Garissa"};
-    private int[] images = {R.mipmap.nairobi_layer,R.mipmap.mombasa_layer,R.mipmap.kisumu_layer,R.mipmap.nakuru_layer,R.mipmap.garissa_layer};
+    private String[] names = {"Nairobi","Mombasa","Kisumu","Nakuru","Garissa","Baringo","Bomet","Bungoma",
+                                "Busia","Elgeyo","Embu","Homa Bay","Isiolo","Kajiado","Kakamega","Kericho",
+                                "Kilifi","Kirinyaga","Kisii","Kitui","Kwale","Laikipia","Lamu","Machakos",
+                                };
+//    private int[] images = {R.mipmap.nairobi_layer,R.mipmap.mombasa_layer,R.mipmap.kisumu_layer,R.mipmap.nakuru_layer,R.mipmap.garissa_layer};
 
     public PerCounty() {
         // Required empty public constructor
@@ -32,7 +35,7 @@ public class PerCounty extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_per_county2, container, false);
         counties = view.findViewById(R.id.counties);
-        adapter = new GridAdapter(images,names,getActivity());
+        adapter = new GridAdapter(names,getActivity());
         counties.setAdapter(adapter);
         return view;
     }

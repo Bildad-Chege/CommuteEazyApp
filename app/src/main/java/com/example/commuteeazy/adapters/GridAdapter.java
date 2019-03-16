@@ -16,14 +16,14 @@ import com.example.commuteeazy.fragments.OperatorsInCounty;
 
 public class GridAdapter extends BaseAdapter {
 
-    private int[] images;
+//    private int[] images;
     private String[] countyNames;
     private HomePage context;
     private LayoutInflater inflater;
     private Activity parent;
 
-    public GridAdapter(int[] images, String[] countyNames, Context context) {
-        this.images = images;
+    public GridAdapter(String[] countyNames, Context context) {
+//        this.images = images;
         this.countyNames = countyNames;
         this.context = (HomePage)context;
 
@@ -32,7 +32,7 @@ public class GridAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        return images.length;
+        return countyNames.length;
     }
 
     @Override
@@ -50,7 +50,7 @@ public class GridAdapter extends BaseAdapter {
         convertView = inflater.inflate(R.layout.grid_element,null);
         TextView tv = convertView.findViewById(R.id.county_name);
         tv.setText(countyNames[position]);
-        ImageView iv = convertView.findViewById(R.id.county_image);
+  //      ImageView iv = convertView.findViewById(R.id.county_image);
         convertView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -61,7 +61,7 @@ public class GridAdapter extends BaseAdapter {
                 transaction.commit();
             }
         });
-        iv.setImageResource(images[position]);
+//        iv.setImageResource(images[position]);
         return convertView;
     }
 }

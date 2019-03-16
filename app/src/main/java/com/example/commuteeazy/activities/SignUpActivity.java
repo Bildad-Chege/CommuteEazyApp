@@ -162,7 +162,7 @@ public class SignUpActivity extends AppCompatActivity implements NamesFrag.BtnNa
 
                 @Override
                 public void onFailure(Call<User> call, Throwable t) {
-                    Toast.makeText(getApplicationContext(),"Something went wrong",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(),"Server not reachable. Check network",Toast.LENGTH_SHORT).show();
                 }
             });
             return null;
