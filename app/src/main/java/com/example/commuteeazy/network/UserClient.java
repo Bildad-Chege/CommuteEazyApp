@@ -1,7 +1,9 @@
 package com.example.commuteeazy.network;
 
+import com.example.commuteeazy.DO.Feed;
 import com.example.commuteeazy.DO.Operator;
 import com.example.commuteeazy.DO.User;
+import com.example.commuteeazy.fragments.Updates;
 
 import java.util.List;
 
@@ -21,4 +23,7 @@ public interface UserClient {
 
     @GET("operators")
     Call<List<Operator>> getAllOperators();
+
+    @GET("getfeeds")
+    Call<List<Feed>> getAllUpdates();
 }

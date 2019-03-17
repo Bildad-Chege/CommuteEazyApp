@@ -118,6 +118,7 @@ public class LoginActivity extends AppCompatActivity  {
             call.enqueue(new Callback<User>() {
                 @Override
                 public void onResponse(Call<User> call, Response<User> response) {
+                    Config.user = response.body();
                     Toast.makeText(getApplicationContext(),"Login successful",Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(LoginActivity.this,HomePage.class);
                     startActivity(intent);
