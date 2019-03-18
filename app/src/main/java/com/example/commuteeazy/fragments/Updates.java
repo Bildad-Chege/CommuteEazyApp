@@ -45,9 +45,9 @@ public class Updates extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_updates, container, false);
         recyclerView = container.findViewById(R.id.updates);
-        layoutManager = new LinearLayoutManager(getActivity());
+        layoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(layoutManager);
-        new LoadFeeds(getActivity(),recyclerView).execute();
+        new LoadFeeds(getContext(),recyclerView).execute();
         return view;
     }
 
