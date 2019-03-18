@@ -53,8 +53,8 @@ public class UpdatesAdapter extends RecyclerView.Adapter<UpdatesAdapter.ViewHold
         TextView postBy;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            feed = itemView.findViewById(R.id.update_text);
-            postBy = itemView.findViewById(R.id.name);
+            feed = (TextView) itemView.findViewById(R.id.update_text);
+            postBy = (TextView) itemView.findViewById(R.id.name);
         }
     }
 

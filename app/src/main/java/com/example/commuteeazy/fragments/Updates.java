@@ -5,6 +5,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -25,6 +26,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -38,16 +40,20 @@ public class Updates extends Fragment {
         // Required empty public constructor
     }
 
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_updates, container, false);
-        recyclerView = container.findViewById(R.id.updates);
-        layoutManager = new LinearLayoutManager(getContext());
+        recyclerView = (RecyclerView) view.findViewById(R.id.updates);
+        layoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(layoutManager);
-        new LoadFeeds(getContext(),recyclerView).execute();
+        new LoadFeeds(getActivity(),recyclerView).execute();
         return view;
     }
 
@@ -55,11 +61,11 @@ public class Updates extends Fragment {
 
         private ProgressDialog dialog = new ProgressDialog(getActivity());
         private Context context;
-        private RecyclerView view;
+        private RecyclerView recyclerView;
 
         public LoadFeeds(Context context, RecyclerView view) {
             this.context = context;
-            this.view = view;
+            this.recyclerView = view;
         }
 
         @Override
@@ -72,7 +78,7 @@ public class Updates extends Fragment {
 
         @Override
         protected String doInBackground(String... strings) {
-            Retrofit.Builder builder = new Retrofit.Builder().baseUrl(Config.hostName);
+            Retrofit.Builder builder = new Retrofit.Builder().baseUrl(Config.hostName).addConverterFactory(GsonConverterFactory.create());
             Retrofit retrofit = builder.build();
             UserClient client = retrofit.create(UserClient.class);
             Call<List<Feed>> call = client.getAllUpdates();
@@ -81,7 +87,7 @@ public class Updates extends Fragment {
                 public void onResponse(Call<List<Feed>> call, Response<List<Feed>> response) {
                     List<Feed> feeds = response.body();
                     UpdatesAdapter adapter = new UpdatesAdapter(context,feeds);
-                    view.setAdapter(adapter);
+                    recyclerView.setAdapter(adapter);
                 }
 
                 @Override

@@ -1,5 +1,6 @@
 package com.example.commuteeazy.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -16,6 +17,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.example.commuteeazy.MapsActivity;
 import com.example.commuteeazy.R;
 import com.example.commuteeazy.adapters.ViewPagerAdapter;
 import com.example.commuteeazy.fragments.PerCounty;
@@ -112,7 +114,8 @@ public class HomePage extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.maps) {
-            // Handle the camera action
+            Intent intent = new Intent(HomePage.this, MapsActivity.class);
+            startActivity(intent);
         } else if (id == R.id.my_profile) {
 
         } else if (id == R.id.about_us) {
